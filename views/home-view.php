@@ -6,7 +6,11 @@
   <body>
 
     <h1>Welcome to the home page</h1>
-    <p>Currently, we serve: <?= $product; ?></p>
+    <p>Currently active worker:</p>
+
+    <?php foreach ($petugas as $value): ?>
+    <p> <?= $value['nama'] ?> </p>
+    <?php endforeach; ?>
 
   </body>
 </html>
