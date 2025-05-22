@@ -1,7 +1,11 @@
 <?php
 
-class HomeController {
+require 'BaseController.php';
+
+class HomeController extends BaseController {
   public function index(Type $var = null) {
-    echo "Hello world";
+    $this->view('home', [
+      "product" => "Computers"
+    ]);
   }
 }
