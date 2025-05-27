@@ -1,8 +1,10 @@
 <?php
 
+namespace helpers;
+
 class ImageHandler
 {
-    private $uploadDir = 'public/uploads/';
+    private $uploadDir = __DIR__ . '/../../' . 'public/uploads/';
     private $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
     public function upload($file)
@@ -23,9 +25,9 @@ class ImageHandler
         $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $baseName);
         $uniqueName = $safeName . '_' . time() . '.' . $ext;
 
-        $targetPath = $this->uploadDir . $uniqueName;
+        $targetPath =  $this->uploadDir . $uniqueName;
 
-        if (!file_exists($this->uploadDir)) {
+        if (!file_exists( $this->uploadDir)) {
             mkdir($this->uploadDir, 0777, true);
         }
 

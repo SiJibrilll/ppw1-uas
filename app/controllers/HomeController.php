@@ -2,16 +2,21 @@
 
 use controllers\BaseController;
 use app\Dbh;
+use helpers\ImageHandler;
+
 
 class HomeController extends BaseController {
   public function index(Type $var = null) {
-    $db = new Dbh();
-    
-    $data = $db->query("SELECT * FROM petugas")->fetchAll();
+   $image = new ImageHandler();
+
+    $imageHandler = new ImageHandler();
+    $result = $imageHandler->upload($_FILES['image']);
+    // $result = $image->getImagePath('tes.png');
     
 
+
     $this->view('home', [
-      "petugas" => $data 
+     'image' => $result
     ]);
   }
 }

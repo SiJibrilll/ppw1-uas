@@ -6,11 +6,14 @@
   <body>
 
     <h1>Welcome to the home page</h1>
-    <p>Currently active worker:</p>
+    <p>Image: </p>
+    <?php var_dump($image) ?>
+    <img src="<?= $image; ?>" alt="">
 
-    <?php foreach ($petugas as $value): ?>
-    <p> <?= $value['nama'] ?> </p>
-    <?php endforeach; ?>
+    <form action="/home" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <button type="submit">Upload Image</button>
+  </form>
 
   </body>
 </html>
