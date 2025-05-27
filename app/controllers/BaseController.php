@@ -1,5 +1,7 @@
 <?php
 
+namespace Controllers;
+
 class BaseController {
   protected function view($view, $data = []) {
     extract($data);

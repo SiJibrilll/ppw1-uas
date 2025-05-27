@@ -1,5 +1,9 @@
 <?php
 
+namespace app;
+
+use PDO;
+
 class Dbh {
   private $conn;
 
