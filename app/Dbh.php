@@ -5,7 +5,7 @@ class Dbh {
 
   function __construct() {
     $servername = "127.0.0.1";
-    $dbName = 'restoranPOS';
+    $dbName = 'ppw_uas';
     $username = "root";
     $password = "";
 
