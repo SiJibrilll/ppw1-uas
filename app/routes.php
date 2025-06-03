@@ -5,11 +5,14 @@ return [
     "/home" => "HomeController@index",
     "/register" => "AuthController@create",
     "/login" => "AuthController@login",
-    "/dashboard" => "DashboardController@index"
+    "/dashboard" => "DashboardController@index",
+    '/comics/create' => 'ComicsController@create'
   ],
 
   "POST" => [
     '/register' => "AuthController@store",
-    '/login' => "AuthController@authenticate"
+    '/logout' => "AuthController@logout",
+    '/login' => "AuthController@authenticate",
+    '/comics' => "ComicsController@store"
   ]
 ];

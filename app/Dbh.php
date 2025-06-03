@@ -24,6 +24,10 @@ class Dbh {
     }
   }
 
+  function getConn() {
+    return $this->conn;
+  }
+
   public function query(string $sql, array $params = []) {
         try {
             $stmt = $this->conn->prepare($sql);
@@ -36,7 +40,7 @@ class Dbh {
         }
     }
   
-  function paginate($table, $limit = 10, $page = 1) {
+  function paginate($table, $order = 'ASC', $limit = 10, $page = 1) {
     $offset = ($page - 1) * $limit;
     
     $stmt = $this->query("SELECT COUNT(*) FROM $table");
@@ -46,7 +50,7 @@ class Dbh {
     // Manually inject limit/offset (safe since they are cast as ints)
     $limit = (int) $limit;
     $offset = (int) $offset;
-    $sql = "SELECT * FROM $table LIMIT $limit OFFSET $offset";
+    $sql = "SELECT * FROM $table ORDER BY id $order LIMIT $limit OFFSET $offset";
 
     
     $stmt = $this->query($sql);

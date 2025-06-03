@@ -15,7 +15,7 @@ class DashboardController extends BaseController {
     echo $url->get('page');
 
     $dbh = new Dbh;
-    $comics = $dbh->paginate('comics');
+    $comics = $dbh->paginate('comics', 'DESC');
 
     $this->view('dashboard', [
         'comics' => $comics

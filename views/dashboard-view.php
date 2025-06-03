@@ -13,5 +13,9 @@
     var_dump($comics);
     echo '</pre>';
     ?>
+
+    <form method='POST' action="/logout">
+        <button type='submit'>LOGOUT</button>
+    </form>
 </body>
 </html>
