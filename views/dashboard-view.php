@@ -7,5 +7,11 @@
 </head>
 <body>
     <h1>Hello admin!</h1>
+
+    <?php 
+    echo '<pre>';
+    var_dump($comics);
+    echo '</pre>';
+    ?>
 </body>
 </html>

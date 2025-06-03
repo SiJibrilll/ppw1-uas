@@ -35,4 +35,27 @@ class Dbh {
             return false;
         }
     }
+  
+  function paginate($table, $limit = 10, $page = 1) {
+    $offset = ($page - 1) * $limit;
+    
+    $stmt = $this->query("SELECT COUNT(*) FROM $table");
+    $total_items = $stmt->fetchColumn();
+    $total_pages = ceil($total_items / $limit);
+
+    // Manually inject limit/offset (safe since they are cast as ints)
+    $limit = (int) $limit;
+    $offset = (int) $offset;
+    $sql = "SELECT * FROM $table LIMIT $limit OFFSET $offset";
+
+    
+    $stmt = $this->query($sql);
+    $data = $stmt->fetchAll();
+
+    return [
+        'data' => $data,
+        'total_pages' => $total_pages,
+        'current_page' => $page
+    ];
+}
 }
