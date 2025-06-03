@@ -3,9 +3,13 @@
 return [
   "GET" => [
     "/home" => "HomeController@index",
+    "/register" => "AuthController@create",
+    "/login" => "AuthController@login",
+    "/dashboard" => "DashboardController@index"
   ],
 
   "POST" => [
-    '/home' => "Homecontroller@index"
+    '/register' => "AuthController@store",
+    '/login' => "AuthController@authenticate"
   ]
 ];

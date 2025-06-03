@@ -5,10 +5,9 @@ use app\Dbh;
 use helpers\ImageHandler;
 
 
-class HomeController extends BaseController {
+class DasboardController extends BaseController {
   public function index(Type $var = null) {
-  
-    $this->view('home', [
+    $this->view('dashboard', [
     ]);
   }
 }
