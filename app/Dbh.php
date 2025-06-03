@@ -40,7 +40,7 @@ class Dbh {
         }
     }
   
-  function paginate($table, $order = 'ASC', $limit = 10, $page = 1) {
+  function paginate($table, $order = 'ASC', $page = 1, $limit = 10) {
     $offset = ($page - 1) * $limit;
     
     $stmt = $this->query("SELECT COUNT(*) FROM $table");
