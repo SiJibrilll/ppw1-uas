@@ -3,15 +3,16 @@
 namespace app;
 
 use PDO;
+$config = require 'config.php';
 
 class Dbh {
   private $conn;
 
   function __construct() {
-    $servername = "localhost";
-    $dbName = '';
-    $username = "";
-    $password = "";
+    $servername = $config['db_host'];
+    $dbName = $config['db_name'];
+    $username = $config['db_user'];
+    $password = $config['db_password'];
 
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
