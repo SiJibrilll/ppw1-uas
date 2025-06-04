@@ -9,9 +9,9 @@ class Dbh {
 
   function __construct() {
     $servername = "localhost";
-    $dbName = 'u985354573_imcomic';
-    $username = "u985354573_admin";
-    $password = "Akunbuatprojek1";
+    $dbName = '';
+    $username = "";
+    $password = "";
 
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
