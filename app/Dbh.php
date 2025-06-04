@@ -8,10 +8,10 @@ class Dbh {
   private $conn;
 
   function __construct() {
-    $servername = "127.0.0.1";
-    $dbName = 'ppw_uas';
-    $username = "root";
-    $password = "";
+    $servername = "localhost";
+    $dbName = 'u985354573_imcomic';
+    $username = "u985354573_admin";
+    $password = "Akunbuatprojek1";
 
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbName", $username, $password);
