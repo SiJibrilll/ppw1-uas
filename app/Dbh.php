@@ -3,12 +3,13 @@
 namespace app;
 
 use PDO;
-$config = require 'config.php';
+
 
 class Dbh {
   private $conn;
 
   function __construct() {
+    $config = require 'config.php';
     $servername = $config['db_host'];
     $dbName = $config['db_name'];
     $username = $config['db_user'];
