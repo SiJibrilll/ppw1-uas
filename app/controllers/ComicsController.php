@@ -5,11 +5,38 @@ use app\Dbh;
 use helpers\ImageHandler;
 use helpers\Auth;
 use helpers\Request;
+use helpers\Url;
 
 class ComicsController extends BaseController {
   public function create() {
     Auth::guard();
     $this->view('create_comics');
+  }
+
+  public function edit() {
+    Auth::guard();
+    $url = new Url;
+    $id = $url->get('id');
+
+    if (!$id) {
+      header('Location: /home');
+      exit;
+    }
+
+    $dbh = new Dbh();
+    $sql = 'SELECT * FROM Comics as c join Images as i on c.image_id=i.id WHERE c.id = ?';
+    $comic = $dbh->query($sql, [$id])->fetchAll()[0];
+    
+    if (!$comic) {
+      echo "Comic with id " . $id . " not found";
+      exit;
+    }
+
+    // $image = $dbh->query('SELECT path FROM Images WHERE id = ?', [$comic[0]['image_id']])->fetchAll();
+    
+    $this->view('edit_comics', [
+      'prev' => $comic,
+    ]);
   }
 
   function store() {

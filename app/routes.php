@@ -6,7 +6,8 @@ return [
     "/register" => "AuthController@create",
     "/login" => "AuthController@login",
     "/dashboard" => "DashboardController@index",
-    '/comics/create' => 'ComicsController@create'
+    '/comics/create' => 'ComicsController@create',
+    '/comics/edit' => 'ComicsController@edit'
   ],
 
   "POST" => [

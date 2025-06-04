@@ -12,10 +12,10 @@ class DashboardController extends BaseController {
 
     $url = new Url();
 
-    echo $url->get('page');
+    $page = $url->get('page', 1);
 
     $dbh = new Dbh;
-    $comics = $dbh->paginate('comics', 'DESC');
+    $comics = $dbh->paginate('comics', 'DESC', $page);
 
     $this->view('dashboard', [
         'comics' => $comics
