@@ -96,50 +96,6 @@
         <div class="row mbr-gallery">
             <div class="col-12 col-md-6 col-lg-6 item gallery-image">
                 <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery01.jpg" alt="Mobirise Website Builder" data-slide-to="0" data-bs-slide-to="0" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery02.jpg" alt="Mobirise Website Builder" data-slide-to="1" data-bs-slide-to="1" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery03.jpg" alt="Mobirise Website Builder" data-slide-to="2" data-bs-slide-to="2" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery04.jpg" alt="Mobirise Website Builder" data-slide-to="3" data-bs-slide-to="3" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
                     <img class="w-100" src="assets/images/gallery10.jpg" alt="Mobirise Website Builder" data-slide-to="4" data-bs-slide-to="4" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
                     <div class="icon-wrapper">
                         <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>

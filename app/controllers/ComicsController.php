@@ -8,6 +8,14 @@ use helpers\Request;
 use helpers\Url;
 
 class ComicsController extends BaseController {
+  function index() {
+    $dbh = new Dbh();
+    $comics = $dbh->paginate('Comics');
+    $this->view('search_comics', [
+      'comics' => $comics
+    ]);
+  }
+
   public function create() {
     Auth::guard();
     $this->view('create_comics');
