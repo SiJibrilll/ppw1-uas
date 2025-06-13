@@ -57,7 +57,7 @@
 						<a class="nav-link link text-black display-4" href="/search" aria-expanded="false">Search</a>
 					</li></ul>
 				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="/login">SIgn in<br></a></div>
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="/login">Sign in<br></a></div>
 			</div>
 		</div>
 	</nav>

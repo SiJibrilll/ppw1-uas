@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html  >
 <head>
-  <!-- Site made with Mobirise Website Builder v6.0.6, https://mobirise.com -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v6.0.6, mobirise.com">
@@ -39,7 +38,7 @@
 						<img src="https://r.mobirisesite.com/1558499/assets/images/photo-1531501410720-c8d437636169.jpeg" alt="Mobirise Website Builder" style="height: 4.3rem;">
 					</a>
 				</span>
-				<span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="  ">ImComics</a></span>
+				<span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="/home">ImComics</a></span>
 			</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<div class="hamburger">
@@ -57,7 +56,7 @@
 						<a class="nav-link link text-black display-4" href="/search" aria-expanded="false">Search</a>
 					</li></ul>
 				
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="  ">Sign in<br></a></div>
+				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="/login">Sign in<br></a></div>
 			</div>
 		</div>
 	</nav>

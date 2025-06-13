@@ -58,7 +58,6 @@ class AuthController extends BaseController {
 
         $_SESSION['old'] = ['username' => $username]; // Save old input
 
-
         $dbh = new Dbh();
         $user  = $dbh->query('SELECT id, password FROM users WHERE username = ?', [$username])->fetch();
 
