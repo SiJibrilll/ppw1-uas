@@ -25,6 +25,27 @@
   
   
 </head>
+<?php 
+// var_dump($comics);
+// $comics = [];
+// var_dump($total_pages);
+// var_dump($current_page);
+?>
+
+<style>
+#search-addon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+#search-addon:hover svg {
+    transform: scale(1.1);
+}
+
+#search-addon:active {
+    transform: scale(0.95);
+}
+</style>
 <body>
   
   <section data-bs-version="5.1" class="menu menu2 cid-uNCrK5IXlC" once="menu" id="menu02-1">
@@ -72,71 +93,73 @@
                     <h4 class="mbr-section-title mbr-fonts-style align-center mb-3 display-2"><strong>Discover</strong></h4>
 
                     <div class="input-group rounded mbr-fonts-style align-center mb-0 mx-4">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                        <span class="input-group-text border-0" id="search-addon">
-                            <i class="fas fa-search"></i>
-                        </span>
+                        <form action="/search" method="get" style="width: 100%;" class="d-flex">
+                            <input type="search" value="<?=$_SESSION['search'] ?: '' ?>" name="search" class="form-control rounded-start" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                            <button type="submit" class="btn input-group-text border-0 rounded-end" id="search-addon" style="cursor: pointer; transition: all 0.2s ease;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s ease;">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                            </button>
+                        </form>
                     </div>
                     
                 </div>
             </div>
         </div>
         <div class="row">
+            <?php foreach ($comics as $comic): ?>
             <div class="item features-image col-12 col-md-6 col-lg-3 active">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery01.jpg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
+                <a href="/comics?id=<?=$comic['id'] ?>" class="text-black">
+                    <div class="item-wrapper">
+                        <div class="item-img mb-2">
+                            <img src="<?=$comic['cover'] ?>" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
+                        </div>
+                        <div class="item-content">
+                            <h5 class="item-title mbr-fonts-style display-7">
+                                <?=$comic['title'] ?>
+                            </h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery02.jpg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-                    </div>
-                </div>
+            <?php endforeach; ?>
+
+            <?php if (empty($comics)): ?>
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    No comics found.
+                </div>  
             </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery03.jpg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-                    </div>
-                </div>
-            </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery04.jpg" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3">
-                    </div>
-                </div>
-            </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery10.jpg" alt="Mobirise Website Builder" title="" data-slide-to="4" data-bs-slide-to="4">
-                    </div>
-                </div>
-            </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery05.jpg" alt="Mobirise Website Builder" title="" data-slide-to="5" data-bs-slide-to="5">
-                    </div>
-                </div>
-            </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery06.jpg" alt="Mobirise Website Builder" title="" data-slide-to="6" data-bs-slide-to="6">
-                    </div>
-                </div>
-            </div>
-            <div class="item features-image col-12 col-md-6 col-lg-3">
-                <div class="item-wrapper">
-                    <div class="item-img">
-                        <img src="assets/images/gallery07.jpg" alt="Mobirise Website Builder" title="" data-slide-to="7" data-bs-slide-to="7">
-                    </div>
-                </div>
+            <?php endif; ?>
+
+            <?php $search = urlencode($_SESSION['search'] ?? ''); ?>
+            <div class="col-12">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item <?= $current_page == $i ? 'active' : '' ?>">
+                                <a class="page-link" href="/search?page=<?= $i ?>&search=<?= $search ?>"><?= $i ?></a>
+                            </li>
+                        <?php endfor; ?>
+
+                        <?php if ($current_page < $total_pages): ?>
+                            <li class="page-item"> 
+                                <a class="page-link" href="/search?page=<?= $current_page + 1 ?>&search=<?= $search ?>">Next</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <?php if ($current_page > 1): ?>
+                            <li class="page-item">
+                                <a class="page-link" href="/search?page=<?= $current_page - 1 ?>&search=<?= $search ?>">Previous</a>
+                            </li>
+                        <?php endif; ?>
+
+                        <li class="page-item">
+                            <a class="page-link" href="/search?page=<?= $total_pages ?>&search=<?= $search ?>">Last</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
 
         </div>

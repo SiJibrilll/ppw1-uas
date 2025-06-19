@@ -42,20 +42,20 @@ class Dbh {
         }
     }
   
-  function paginate($table, $order = 'ASC', $page = 1, $limit = 10) {
+  function paginate($table, $order = 'ASC', $page = 1, $limit = 10, $where = '') {
     $offset = ($page - 1) * $limit;
     
-    $stmt = $this->query("SELECT COUNT(*) FROM $table");
+    $stmt = $this->query("SELECT COUNT(*) FROM $table WHERE title LIKE ?", ["%$where%"]);
     $total_items = $stmt->fetchColumn();
     $total_pages = ceil($total_items / $limit);
 
     // Manually inject limit/offset (safe since they are cast as ints)
     $limit = (int) $limit;
     $offset = (int) $offset;
-    $sql = "SELECT * FROM $table ORDER BY id $order LIMIT $limit OFFSET $offset";
+    $sql = "SELECT * FROM $table WHERE title LIKE ? ORDER BY id $order LIMIT $limit OFFSET $offset";
 
     
-    $stmt = $this->query($sql);
+    $stmt = $this->query($sql, ["%$where%"]);
     $data = $stmt->fetchAll();
 
     return [

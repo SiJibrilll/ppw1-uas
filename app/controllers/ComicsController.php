@@ -10,9 +10,23 @@ use helpers\Url;
 class ComicsController extends BaseController {
   function index() {
     $dbh = new Dbh();
-    $comics = $dbh->paginate('Comics', 'DESC', 1, 8);
+    $request = new Request();
+    $search = $request->input('search', '');
+    $page = (int) $request->input('page', 1);
+    $comics = $dbh->paginate('Comics', 'DESC', $page, 8, $search);
+
+    $_SESSION['search'] = $search; // Save search term for later use
+
+    //for each comic, get the cover image path
+    foreach ($comics['data'] as &$comic) {
+      $image = $dbh->query('SELECT path FROM Images WHERE id = ?', [$comic['image_id']])->fetchAll();
+      $comic['cover'] = $image[0]['path'] ?? $GLOBALS['placeholder'];
+    }
+
     $this->view('search_comics', [
-      'comics' => $comics
+      'comics' => $comics['data'],
+      'total_pages' => $comics['total_pages'],
+      'current_page' => $comics['current_page'],
     ]);
   }
 
