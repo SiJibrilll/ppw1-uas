@@ -32,7 +32,7 @@ class AuthController extends BaseController {
 
         $dbh = new Dbh();
 
-        $result = $dbh->query('INSERT INTO users (username, password) VALUES (?, ?)', [$username, $hashed_password]);
+        $result = $dbh->query('INSERT INTO Users (username, password) VALUES (?, ?)', [$username, $hashed_password]);
 
         if (!$result->rowCount() > 0) { // if no rows are inserted, that means theres an error
             $_SESSION['error'] = "Something went wrong: Username might already exist.";
@@ -59,7 +59,7 @@ class AuthController extends BaseController {
         $_SESSION['old'] = ['username' => $username]; // Save old input
 
         $dbh = new Dbh();
-        $user  = $dbh->query('SELECT id, password FROM users WHERE username = ?', [$username])->fetch();
+        $user  = $dbh->query('SELECT id, password FROM Users WHERE username = ?', [$username])->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
             // Successful login
