@@ -9,7 +9,8 @@ return [
     '/comics/create' => 'ComicsController@create',
     '/comics/edit' => 'ComicsController@edit',
     '/search' => 'ComicsController@index',
-    '/comics' => 'ComicsController@read',
+    '/comics' => 'ComicsController@info',
+    '/read' => 'ComicsController@read',
   ],
 
   "POST" => [

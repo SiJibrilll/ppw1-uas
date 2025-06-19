@@ -205,7 +205,7 @@
         <!-- Chapter List -->
         <div class="chapter-list">
             <?php foreach ($chapters as $chapter): ?>
-                <a href="read?id=<?= htmlspecialchars($chapter['id'])?>" class="chapter-item">
+                <a href="/read?comic=<?= htmlspecialchars($comic['id'])?>&chapter=<?= htmlspecialchars($chapter['id'])?>" class="chapter-item">
                     <img src="<?= htmlspecialchars($chapter['cover'] ?? $GLOBALS['placeholder']) ?>" 
                         alt="Chapter 11 Thumbnail" class="chapter-thumbnail">
                     <div class="chapter-title"><?= htmlspecialchars($chapter['title'])?></div>
