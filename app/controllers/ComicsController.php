@@ -13,7 +13,7 @@ class ComicsController extends BaseController {
     $request = new Request();
     $search = $request->input('search', '');
     $page = (int) $request->input('page', 1);
-    $comics = $dbh->paginate('Comics', 'DESC', $page, 8, $search);
+    $comics = $dbh->paginate('Comics', 'DESC', $page, 8, 'title', $search);
 
     $_SESSION['search'] = $search; // Save search term for later use
 
@@ -27,6 +27,44 @@ class ComicsController extends BaseController {
       'comics' => $comics['data'],
       'total_pages' => $comics['total_pages'],
       'current_page' => $comics['current_page'],
+    ]);
+  }
+
+  function read() {
+    $request = new Request();
+    $id = $request->input('id');
+
+    if (!$id) {
+      header('Location: /home');
+      exit;
+    }
+
+    $dbh = new Dbh();
+    $sql = 'SELECT c.*, i.path as cover FROM Comics as c left join Images as i on c.image_id=i.id WHERE c.id = ?';
+    $comic = $dbh->query($sql, [$id])->fetch();
+    if (!$comic) {
+      echo "Comic with id " . $id . " not found";
+      exit;
+    }
+    // $chapters = $dbh->query('SELECT * FROM Chapters WHERE comic_id = ? ORDER BY id DESC', [$id])->fetchAll();
+    //modify above to also get the cover image path
+    // $chapters = $dbh->query('SELECT c.*, i.path as cover FROM Chapters as c LEFT JOIN Images as i ON c.image_id = i.id WHERE c.comic_id = ? ORDER BY c.id DESC', [$id])->fetchAll();
+    // use paginate method and get the image
+    $chapters = $dbh->paginate('Chapters', 'DESC', $request->input('page', 1), 10, $id);
+    //get chapter cover images
+    foreach ($chapters['data'] as &$chapter) {
+      $image = $dbh->query('SELECT path FROM Images WHERE id = ?', [$chapter['image_id']])->fetchAll();
+    
+      $chapter['cover'] = $image[0]['path'] ?? $GLOBALS['placeholder'];
+    }
+
+    
+
+    $this->view('comic_detail', [
+      'comic' => $comic,
+      'chapters' => $chapters['data'],
+      'total_pages' => $chapters['total_pages'],
+      'current_page' => $chapters['current_page'],
     ]);
   }
 

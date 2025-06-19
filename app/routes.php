@@ -8,7 +8,8 @@ return [
     "/dashboard" => "DashboardController@index",
     '/comics/create' => 'ComicsController@create',
     '/comics/edit' => 'ComicsController@edit',
-    '/search' => 'ComicsController@index'
+    '/search' => 'ComicsController@index',
+    '/comics' => 'ComicsController@read',
   ],
 
   "POST" => [

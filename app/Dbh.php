@@ -42,10 +42,10 @@ class Dbh {
         }
     }
   
-  function paginate($table, $order = 'ASC', $page = 1, $limit = 10, $where = '') {
+  function paginate($table, $order = 'ASC', $page = 1, $limit = 10, $column = 'id', $where = '') {
     $offset = ($page - 1) * $limit;
     
-    $stmt = $this->query("SELECT COUNT(*) FROM $table WHERE title LIKE ?", ["%$where%"]);
+    $stmt = $this->query("SELECT COUNT(*) FROM $table WHERE $column LIKE ?", ["%$where%"]);
     $total_items = $stmt->fetchColumn();
     $total_pages = ceil($total_items / $limit);
 
