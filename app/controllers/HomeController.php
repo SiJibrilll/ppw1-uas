@@ -14,12 +14,17 @@ class HomeController extends BaseController {
     //         ORDER BY ch.created_at DESC 
     //         LIMIT 4";
     //update the code above to also join with image table to get the comic cover images
-    $sql = "SELECT c.*, i.path as cover, ch.created_at 
-            FROM Comics c 
-            LEFT JOIN Images i ON c.image_id = i.id 
-            LEFT JOIN Chapters ch ON c.id = ch.comic_id 
+    $sql = "SELECT c.*, i.path AS cover, ch.created_at
+            FROM Comics c
+            LEFT JOIN Images i ON c.image_id = i.id
+            LEFT JOIN (
+                SELECT comic_id, MAX(created_at) AS created_at
+                FROM Chapters
+                GROUP BY comic_id
+            ) ch ON c.id = ch.comic_id
             ORDER BY ch.created_at DESC
-            LIMIT 4";
+            LIMIT 4;
+            ";
     
     $dbh = new Dbh();
     $updates = $dbh->query($sql)->fetchAll();

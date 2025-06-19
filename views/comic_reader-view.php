@@ -11,6 +11,18 @@
             box-sizing: border-box;
         }
 
+        a {
+        all: unset;
+        cursor: pointer;
+        display: inline;
+        color: inherit;
+        text-decoration: none;
+        }
+
+        a:hover {
+        text-decoration: underline; /* Optional: visible hover effect */
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #1a1a1a;
@@ -178,7 +190,10 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="comic-title"><?= htmlspecialchars($comic['title'])?></h1>
+        <a href="/comics?id=<?=htmlspecialchars($comic['id'])?>)">
+            <h1 class="manga-title"><?= htmlspecialchars($comic['title'])?></h1>
+        </a>
+        
         <nav class="chapter-nav">
             <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&chapter=<?= max(1, $current_page - 1) ?>" class="nav-link <?= $chapter['id'] <= 1 ? 'disabled' : '' ?>">← Previous</a>
             <div class="current-chapter">Chapter: <?= htmlspecialchars($chapter['title']) ?></div>

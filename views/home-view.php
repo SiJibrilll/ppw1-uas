@@ -96,7 +96,7 @@
         <div class="row mbr-gallery">
             <?php foreach ($updates as $update): ?>
             <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <a href="/search">
+                <a href="/comics?id=<?= htmlspecialchars($update['id'])?>">
                   <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
                       <img class="w-100" src="<?=$update['cover'] ?: $GLOBALS['placeholder']?>" alt="Mobirise Website Builder" data-slide-to="4" data-bs-slide-to="4" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
                       <div class="icon-wrapper">
@@ -186,7 +186,7 @@
       <?php foreach ($comics as $comic): ?>
       <div class="item features-image col-12 col-md-6 col-lg-3">
         <div class="item-wrapper">
-          <a href="/search">
+          <a href="/comics?id=<?= htmlspecialchars($comic['id'])?>">
             <div class="item-img mb-3">
               <img src="<?= $comic['cover'] ?: $GLOBALS['placeholder'] ?>" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
             </div>
