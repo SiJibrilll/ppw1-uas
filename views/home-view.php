@@ -94,50 +94,21 @@
         </div>
         
         <div class="row mbr-gallery">
+            <?php foreach ($updates as $update): ?>
             <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery10.jpg" alt="Mobirise Website Builder" data-slide-to="4" data-bs-slide-to="4" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
+                <a href="/search">
+                  <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
+                      <img class="w-100" src="<?=$update['cover'] ?: $GLOBALS['placeholder']?>" alt="Mobirise Website Builder" data-slide-to="4" data-bs-slide-to="4" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
+                      <div class="icon-wrapper">
+                          <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                      </div>
+                  </div>
+                </a>
                 <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
+                    <?= htmlspecialchars($update['title']) ?>
                 </h6>
             </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery05.jpg" alt="Mobirise Website Builder" data-slide-to="5" data-bs-slide-to="5" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery06.jpg" alt="Mobirise Website Builder" data-slide-to="6" data-bs-slide-to="6" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 item gallery-image">
-                <div class="item-wrapper mb-3" data-toggle="modal" data-bs-toggle="modal" data-target="#uND1zFLw8g-modal" data-bs-target="#uND1zFLw8g-modal">
-                    <img class="w-100" src="assets/images/gallery07.jpg" alt="Mobirise Website Builder" data-slide-to="7" data-bs-slide-to="7" data-target="#lb-uND1zFLw8g" data-bs-target="#lb-uND1zFLw8g">
-                    <div class="icon-wrapper">
-                        <span class="mobi-mbri mobi-mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                    </div>
-                </div>
-                <h6 class="mbr-item-subtitle mbr-fonts-style align-center mb-0 mt-3 display-7">
-                    Image Caption and <a href="#" class="text-primary">Link</a>
-                </h6>
-            </div>
+            <?php endforeach; ?>
         </div>
 
         <div class="modal mbr-slider" tabindex="-1" role="dialog" aria-hidden="true" id="uND1zFLw8g-modal">
@@ -212,64 +183,35 @@
       </div>
     </div>
     <div class="row">
-      <div class="item features-image col-12 col-md-6 col-lg-3 active">
+      <?php foreach ($comics as $comic): ?>
+      <div class="item features-image col-12 col-md-6 col-lg-3">
         <div class="item-wrapper">
-          <div class="item-img mb-3">
-            <img src="https://r.mobirisesite.com/1558499/assets/images/photo-1593345215990-170543af6949.jpeg" alt="Mobirise Website Builder" title="">
-          </div>
+          <a href="/search">
+            <div class="item-img mb-3">
+              <img src="<?= $comic['cover'] ?: $GLOBALS['placeholder'] ?>" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
+            </div>
+          </a>
           <div class="item-content align-left">
-            <h5 class="item-title mbr-fonts-style mt-0 mb-2 display-5">
-              <strong>Attack on Titan: The Conclusion</strong>
+            <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
+              <strong><?=$comic['title']?></strong>
             </h5>
-            
-            
-            
           </div>
         </div>
       </div>
+      <?php endforeach; ?>
+
       <div class="item features-image col-12 col-md-6 col-lg-3">
         <div class="item-wrapper">
-          <div class="item-img mb-3">
-            <img src="https://r.mobirisesite.com/1558499/assets/images/photo-1587270613291-b5c7042fc104.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-          </div>
-          <div class="item-content align-left">
-            <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
-              <strong>One Piece: Chapter 1100</strong>
-            </h5>
-            
-            
-            
-          </div>
-        </div>
-      </div>
-      <div class="item features-image col-12 col-md-6 col-lg-3">
-        <div class="item-wrapper">
-          <div class="item-img mb-3">
-            <img src="https://r.mobirisesite.com/1558499/assets/images/photo-1618519764620-7403abdbdfe9.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-          </div>
-          <div class="item-content align-left">
-            <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
-              <strong>My Hero Academia: Origins</strong>
-            </h5>
-            
-            
-            
-          </div>
-        </div>
-      </div>
-      <div class="item features-image col-12 col-md-6 col-lg-3">
-        <div class="item-wrapper">
-          <div class="item-img mb-3">
-            <img src="https://r.mobirisesite.com/1558499/assets/images/photo-1613376023733-0a73315d9b06.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-          </div>
-          <div class="item-content align-left">
-            <h5 class="item-title mbr-fonts-style mb-2 mt-0 display-5">
-              <strong>Celestial Guardians: New Series</strong>
-            </h5>
-            
-            
-            
-          </div>
+          <a href="/search" style="color: black;">
+            <div class="item-img mb-3 p-5" style="background-color: lightgray; border-radius: 40px;">
+              <h5 class="item-title mbr-fonts-style mt-0 display-5" style="padding-top: 30%;">
+                <strong>See more</strong>
+              </h5>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" style="max-width: 50%;">
+                <path fill-rule="evenodd" d="M2 10a.75.75 0 0 1 .75-.75h12.59l-2.1-1.95a.75.75 0 1 1 1.02-1.1l3.5 3.25a.75.75 0 0 1 0 1.1l-3.5 3.25a.75.75 0 1 1-1.02-1.1l2.1-1.95H2.75A.75.75 0 0 1 2 10Z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </a>
         </div>
       </div>
     </div>

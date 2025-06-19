@@ -1,5 +1,6 @@
 <?php
 $root = __DIR__ . "/../";
+$GLOBALS['placeholder'] = '/uploads/placeholder.webp';
 
 require_once __DIR__ . '/../app/Autoloader.php';
 

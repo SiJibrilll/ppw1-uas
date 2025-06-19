@@ -10,7 +10,7 @@ use helpers\Url;
 class ComicsController extends BaseController {
   function index() {
     $dbh = new Dbh();
-    $comics = $dbh->paginate('Comics');
+    $comics = $dbh->paginate('Comics', 'DESC', 1, 8);
     $this->view('search_comics', [
       'comics' => $comics
     ]);
