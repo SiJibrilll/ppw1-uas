@@ -11,8 +11,10 @@ return [
     '/search' => 'ComicsController@index',
     '/comics' => 'ComicsController@info',
     '/read' => 'ComicsController@read',
+    // -- chapter management
     '/chapters' => 'ChaptersController@index',
     '/chapters/create' => 'ChaptersController@create',
+    '/chapters/edit' => 'ChaptersController@edit',
   ],
 
   "POST" => [
@@ -23,5 +25,6 @@ return [
     '/comics/update' => "ComicsController@update",
     '/comics/delete' => "ComicsController@delete",
     '/chapters' => "ChaptersController@store",
+    '/chapters/update' => "ChaptersController@update",
   ]
 ];

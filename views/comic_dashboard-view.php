@@ -443,7 +443,11 @@
         
              
         </div>
-        <a href="/home" style="width: 100%; text-align:center; margin-right: 50%; margin-left: 50%;">Home</a>
+        <div style="width: 100%; text-align:center; display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px;">
+            <a href="/home" >Home</a>
+            <a href="/dashboard">Dashboard</a>
+
+        </div>
     </div>
 </body>
 </html>

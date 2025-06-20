@@ -118,4 +118,103 @@ class ChaptersController extends BaseController {
         header("Location: /chapters?comic_id=" . urlencode($comicId));
         exit;
     }
+
+    function edit() {
+        Auth::guard();
+        $request = new Request();
+        $chapterId = $request->input('id');
+        
+        if (!$chapterId) {
+            header('Location: /dashboard');
+            exit;
+        }
+
+        $dbh = new Dbh();
+        $chapter = $dbh->query('SELECT C.*, I.path as cover FROM Chapters C left join Images I on C.image_id=I.id WHERE C.id = ?', [$chapterId])->fetch();
+        if (!$chapter) {
+            echo "Chapter with id " . $chapterId . " not found";
+            exit;
+        }
+
+        $this->view('edit_chapters', [
+            'chapter' => $chapter
+        ]);
+
+    }
+
+    function update() {
+        Auth::guard();
+
+        $request = new Request();
+
+        $title = $request->input('title');
+        $id = $request->input('id');
+        $cover = $request->file('cover');
+        $imageId = null;
+        $comicId = $request->input('comic_id');
+
+        if (!$id || !$comicId) {
+            header('Location: /dashboard');
+            exit;
+        }
+
+        $_SESSION['old'] = [
+            'title' => $title,
+            'id' => $id
+        ];
+
+        if ($title == '') {
+            $_SESSION['errors'] = ['title cannot be empty!'];
+            header('Location: /chapters/edit?id=' . urlencode($id));
+            exit;
+        }
+
+        
+        $dbh = new Dbh();
+        $conn = $dbh->getConn();
+        
+        if ($cover != null) {
+        $ih = new ImageHandler;
+        $path = $ih->upload($cover);
+
+        if (array_key_exists('path', $path)) {
+            // Check if there's already an image for this comic
+            $checkSql = 'SELECT id FROM Images WHERE id = ?';
+            $checkResult = $dbh->query($checkSql, [$id]);
+
+            if ($checkResult && $checkResult->rowCount() > 0) {
+                // Update existing image
+                $updateSql = 'UPDATE Images SET path = ? WHERE id = ?';
+                $dbh->query($updateSql, [$path['path'], $id]);
+                $imageId = $id;
+            } else {
+                // Insert new image
+                $insertSql = 'INSERT INTO Images (path) VALUES (?)';
+                $dbh->query($insertSql, [$path['path']]);
+
+                // Get the new image ID
+                $imageId = $dbh->getConn()->lastInsertId();
+            }
+        }
+    }
+
+        // Update the chapter
+        if ($imageId !== null) {
+            $sql = 'UPDATE Chapters SET title = ?, image_id = ? WHERE id = ?';
+            $result = $dbh->query($sql, [$title, $imageId, $id]);
+        } else {
+            $sql = 'UPDATE Chapters SET title = ? WHERE id = ?';
+            $result = $dbh->query($sql, [$title, $id]);
+        }
+
+        if (!$result->rowCount() > 0) { // if no rows are updated, that means theres an error
+            $_SESSION['errors'] = ["Oops, something went wrong!"];
+            header("Location: /chapters/edit?id=" . urlencode($id));
+            exit;
+        }
+
+        unset($_SESSION['old']);
+        header("Location: /chapters?comic_id=" . urlencode($comicId));
+        exit;
+    }
 }
