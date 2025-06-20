@@ -255,7 +255,7 @@ unset($_SESSION['old'], $_SESSION['errors']);
                 </div>
 
                 <button type="submit" class="submit-btn">
-                    Submit Comic
+                    Submit Chapter Edit
                 </button>
             </form>
         </div>

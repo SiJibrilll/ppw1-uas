@@ -68,19 +68,16 @@ class ComicsController extends BaseController {
   function read() {
     $request = new Request();
     $comic_id = $request->input('comic');
-    $chapter_id = $request->input('chapter');
-    if (!$chapter_id) {
-      header('Location: /home');
-      exit;
-    }
+    $page = $request->input('page', 1);
 
     $dbh = new Dbh();
     
-    $chapters = $dbh->paginate('Chapters', 'DESC', $chapter_id, 1, 'comic_id', '=', $comic_id);
+    $chapters = $dbh->paginate('Chapters', 'DESC', $page, 1, 'comic_id', '=', $comic_id);
 
-    $chapter = $dbh->query('SELECT * FROM Chapters WHERE id = ?', [$chapter_id])->fetch();
-    if (!$chapter) {
-      echo "Chapter with id " . $chapter_id . " not found";
+    // get pages from chapter
+    $chapter_id = $chapters['data'][0]['id'] ?? null;
+    if (!$chapter_id) {
+      echo "Chapter not found for comic with id " . $comic_id;
       exit;
     }
 
@@ -90,7 +87,6 @@ class ComicsController extends BaseController {
 
     $this->view('comic_reader', [
       'comic' => $comic,
-      'chapter' => $chapter,
       'pages' => $pages,
       'comic_id' => $comic_id,
       'chapter_id' => $chapter_id,

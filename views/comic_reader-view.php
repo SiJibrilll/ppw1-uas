@@ -194,11 +194,6 @@
             <h1 class="manga-title"><?= htmlspecialchars($comic['title'])?></h1>
         </a>
         
-        <nav class="chapter-nav">
-            <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&chapter=<?= max(1, $current_page - 1) ?>" class="nav-link <?= $chapter['id'] <= 1 ? 'disabled' : '' ?>">← Previous</a>
-            <div class="current-chapter">Chapter: <?= htmlspecialchars($chapter['title']) ?></div>
-            <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&chapter=<?= $current_page + 1 ?>" class="nav-link <?= $current_page == $total_pages ? 'disabled' : '' ?>">Next →</a>
-        </nav>
     </header>
 
     <main class="reader-container">
@@ -217,9 +212,9 @@
 
     <footer class="bottom-nav">
         <nav class="chapter-nav">
-            <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&chapter=<?= max(1, $current_page - 1) ?>" class="nav-link <?= $chapter['id'] <= 1 ? 'disabled' : '' ?>">← Previous</a>
-            <div class="current-chapter">Chapter <?= $current_page ?> of <?= $total_pages ?></div>
-            <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&chapter=<?= $current_page + 1 ?>" class="nav-link <?= $current_page == $total_pages ? 'disabled' : '' ?>">Next →</a>
+            <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&page=<?= max(1, $current_page - 1) ?>" class="nav-link <?= $current_page <= 1 ? 'disabled' : '' ?>">← Previous</a>
+            <div class="current-chapter">Chapter <?= $total_pages - $current_page + 1 ?> of <?= $total_pages ?></div>
+            <a href="/read?comic=<?= htmlspecialchars($comic_id) ?>&page=<?= $current_page + 1 ?>" class="nav-link <?= $current_page == $total_pages ? 'disabled' : '' ?>">Next →</a>
         </nav>
         <!-- go back to comic detail page link -->
         <div style="margin-top: 5%; text-align: center;">
