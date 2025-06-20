@@ -232,7 +232,6 @@ unset($_SESSION['old'], $_SESSION['errors']);
                            name="cover" 
                            class="file-input" 
                            accept="image/*" 
-                           required 
                            onchange="previewCover(this)">
                     <div class="cover-preview" id="coverPreview">
                         <div class="cover-preview-placeholder">
@@ -315,9 +314,9 @@ unset($_SESSION['old'], $_SESSION['errors']);
             const author = document.getElementById('author').value.trim();
             const cover = document.getElementById('cover').files[0];
 
-            if (!title || !author || !cover) {
+            if (!title || !author) {
                 e.preventDefault();
-                alert('Please fill in all required fields and select a cover image.');
+                alert('Please fill in all required fields');
                 return false;
             }
 
