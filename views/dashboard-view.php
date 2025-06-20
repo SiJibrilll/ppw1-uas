@@ -406,17 +406,20 @@
                         <!-- Sample data row - replace with PHP loop -->
                          
                          <?php foreach($comics as $comic): ?>
-                        <tr onclick="location.href = '/comics?id=<?= htmlspecialchars($comic['id']) ?>';">
-                            <td class="cover-cell">
+                        <tr>
+                            <td onclick="location.href = '/comics?id=<?= htmlspecialchars($comic['id']) ?>';" class="cover-cell">
                                 <img src="<?= htmlspecialchars($comic['cover']) ?: $GLOBALS['placeholder']?>" alt="<?= $comic['title']?> Cover" class="cover-image">
                             </td>
-                            <td class="title-cell"><?= htmlspecialchars($comic['title']) ?></td>
-                            <td><?= htmlspecialchars($comic['author']) ?></td>
-                            <td class="description-cell" title="<?= htmlspecialchars($comic['description']) ?>"><?= htmlspecialchars($comic['description']) ?></td>
-                            <td class="chapter-count"><?= htmlspecialchars($comic['chapter_count']) ?></td>
+                            <td onclick="location.href = '/comics?id=<?= htmlspecialchars($comic['id']) ?>';" class="title-cell"><?= htmlspecialchars($comic['title']) ?></td>
+                            <td onclick="location.href = '/comics?id=<?= htmlspecialchars($comic['id']) ?>';"><?= htmlspecialchars($comic['author']) ?></td>
+                            <td onclick="location.href = '/comics?id=<?= htmlspecialchars($comic['id']) ?>';" class="description-cell" title="<?= htmlspecialchars($comic['description']) ?>"><?= htmlspecialchars($comic['description']) ?></td>
+                            <td onclick="location.href = '/comics?id=<?= htmlspecialchars($comic['id']) ?>';" class="chapter-count"><?= htmlspecialchars($comic['chapter_count']) ?></td>
                             <td class="actions">
                                 <a href="/comics/edit?id=<?= htmlspecialchars($comic['id']) ?>" class="btn btn-edit">Edit</a>
-                                <a href="delete_comic.php?id=1" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this comic?')">Delete</a>
+                                <form id="delete/<?= htmlspecialchars($comic['id']) ?>" action="/comics/delete" method="POST" >
+                                    <input type="text" name="id" value="<?= htmlspecialchars($comic['id']) ?>" hidden>
+                                    <div class="btn btn-delete" type="submit"  onclick="if(confirm('Are you sure you want to delete this comic?')) {document.getElementById('delete/<?= htmlspecialchars($comic['id']) ?>').submit()}">Delete</div>
+                                </form>
                             </td>
                         </tr>
 

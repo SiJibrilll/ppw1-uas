@@ -18,6 +18,7 @@ return [
     '/logout' => "AuthController@logout",
     '/login' => "AuthController@authenticate",
     '/comics' => "ComicsController@store",
-    '/comics/update' => "ComicsController@update"
+    '/comics/update' => "ComicsController@update",
+    '/comics/delete' => "ComicsController@delete",
   ]
 ];

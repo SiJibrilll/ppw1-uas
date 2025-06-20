@@ -264,4 +264,26 @@ class ComicsController extends BaseController {
     exit;
     
   }
+
+  function delete() {
+    Auth::guard();
+    $request = new Request();
+    $id = $request->input('id');
+    if (!$id) {
+      header('Location: /dashboard');
+      exit;
+    }
+    $dbh = new Dbh();
+    $sql = 'DELETE FROM Comics WHERE id = ?';
+    $result = $dbh->query($sql, [$id]);
+    if (!$result || $result->rowCount() <= 0) { // if no rows are deleted, that means theres an error
+      $_SESSION['errors'] = ["Oops, something went wrong!"];
+      header("Location: /dashboard");
+      exit;
+    }
+
+    unset($_SESSION['old']);
+    header("Location: /dashboard");
+    exit;
+  }
 }
