@@ -8,43 +8,6 @@ $errors = $_SESSION['errors'] ?? [];
 unset($_SESSION['old'], $_SESSION['errors']);
 ?>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <?php if (!empty($errors)): ?>
-    <div style="color:red;">
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                    <li><?= htmlspecialchars($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
-   
-    <form method='POST' action="/comics" enctype="multipart/form-data">
-        <img src="<?= $old['path'] ?>" alt="">
-        <label for="cover">Comic cover</label>
-        <input name='cover' type="file">
-
-        <label for="title">Comic title</label>
-        <input value="<?= htmlspecialchars($old['title'] ?? '') ?>" name='title' type="text">
-
-        <label for="author">Comic author</label>
-        <input value="<?= htmlspecialchars($old['author'] ?? '') ?>" name='author' type="text">
-
-        <label for="description">Comic description</label>
-        <textarea name="description" id=""><?= htmlspecialchars($old['description'] ?? '') ?></textarea>
-        
-        <button type='submit'>Submit</button>
-    </form>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,7 +212,7 @@ unset($_SESSION['old'], $_SESSION['errors']);
         <div class="form-card">
             <h2 class="form-title">Submit New Comic</h2>
 
-            <form method="POST" enctype="multipart/form-data" id="comicForm" action="/comics">
+            <form method="POST" enctype="multipart/form-data" id="comicForm" action="/comics/update">
                 <?php if (!empty($errors)): ?>
                     <div style="color:red;">
                         <ul>
@@ -259,6 +222,8 @@ unset($_SESSION['old'], $_SESSION['errors']);
                         </ul>
                     </div>
                 <?php endif; ?>
+               
+                <input type="text" name="id" id="id" value="<?= htmlspecialchars($old['id'] ?? '') ?>" hidden>
 
                 <div class="form-group">
                     <label for="cover" class="form-label">Cover Image *</label>
@@ -373,8 +338,8 @@ unset($_SESSION['old'], $_SESSION['errors']);
         });
 
         // Set initial preview if editing existing comic
-        <?php if (isset($old['path']) && !empty($old['path'])): ?>
-            setInitialPreview('<?php echo htmlspecialchars($old['path']); ?>');
+        <?php if (isset($old['cover']) && !empty($old['cover'])): ?>
+            setInitialPreview('<?php echo htmlspecialchars($old['cover']); ?>');
         <?php endif; ?>
     </script>
 </body>

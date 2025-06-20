@@ -17,6 +17,7 @@ return [
     '/register' => "AuthController@store",
     '/logout' => "AuthController@logout",
     '/login' => "AuthController@authenticate",
-    '/comics' => "ComicsController@store"
+    '/comics' => "ComicsController@store",
+    '/comics/update' => "ComicsController@update"
   ]
 ];

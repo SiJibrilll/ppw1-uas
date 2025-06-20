@@ -115,13 +115,14 @@ class ComicsController extends BaseController {
     }
 
     $dbh = new Dbh();
-    $sql = 'SELECT * FROM Comics as c left join Images as i on c.image_id=i.id WHERE c.id = ?';
+    $sql = 'SELECT c.*, i.path as cover FROM Comics as c left join Images as i on c.image_id=i.id WHERE c.id = ?';
     $comic = $dbh->query($sql, [$id])->fetchAll()[0];
     
     if (!$comic) {
       echo "Comic with id " . $id . " not found";
       exit;
     }
+    
 
     // $image = $dbh->query('SELECT path FROM Images WHERE id = ?', [$comic[0]['image_id']])->fetchAll();
     
@@ -183,5 +184,84 @@ class ComicsController extends BaseController {
     header("Location: /dashboard");
     exit;
 
+  }
+
+  function update() {
+    Auth::guard();
+    
+
+    $request = new Request();
+    $id = $request->input('id');
+    $title = $request->input('title');
+    $author = $request->input('author');
+    $description = $request->input('description');
+    $cover = $request->file('cover');
+
+    $_SESSION['old'] = [
+        'title' => $title,
+        'author' => $author,
+        'description' => $description,
+    ];
+
+    if ($title == '' || $author == "") {
+        $_SESSION['errors'] = ['title and author cannot be empty!'];
+        header('Location: /comics/edit?id=' . $id);
+        exit;
+    }
+    
+
+    $dbh = new Dbh();
+    $conn = $dbh->getConn();
+    
+    $imageId = null;
+
+    if ($cover != null) {
+        $ih = new ImageHandler;
+        $path = $ih->upload($cover);
+
+        if (array_key_exists('path', $path)) {
+            // Check if there's already an image for this comic
+            $checkSql = 'SELECT id FROM Images WHERE id = ?';
+            $checkResult = $dbh->query($checkSql, [$id]);
+
+            if ($checkResult && $checkResult->rowCount() > 0) {
+                // Update existing image
+                $updateSql = 'UPDATE Images SET path = ? WHERE id = ?';
+                $dbh->query($updateSql, [$path['path'], $id]);
+                $imageId = $id;
+            } else {
+                // Insert new image
+                $insertSql = 'INSERT INTO Images (path) VALUES (?)';
+                $dbh->query($insertSql, [$path['path']]);
+
+                // Get the new image ID
+                $imageId = $dbh->getConn()->lastInsertId();
+            }
+        }
+    }
+
+    // Update the comic
+    if ($imageId !== null) {
+        $sql = 'UPDATE Comics SET title = ?, author = ?, description = ?, image_id = ? WHERE id = ?';
+        $result = $dbh->query($sql, [$title, $author, $description, $imageId, $id]);
+    } else {
+        $sql = 'UPDATE Comics SET title = ?, author = ?, description = ? WHERE id = ?';
+        $result = $dbh->query($sql, [$title, $author, $description, $id]);
+    }
+
+
+    if (!$result || $result->rowCount() <= 0) { // if no rows are updated, that means theres an error
+        $_SESSION['errors'] = ["Oops, something went wrong!"];
+        header("Location: /comics/edit?id=" . $id);
+        exit;
+    }
+
+    
+    
+
+    unset($_SESSION['old']);
+    header("Location: /dashboard");
+    exit;
+    
   }
 }
