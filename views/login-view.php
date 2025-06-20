@@ -1,7 +1,5 @@
 <?php
-session_start();
 
-// Show error message if any
 
 
 // Show old values

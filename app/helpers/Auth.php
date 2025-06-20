@@ -12,4 +12,14 @@ class Auth {
             exit;
         }
     }
+
+    static function guest() {
+        session_start();
+
+        if (isset($_SESSION['user_id'])) {
+            //logged in, redirect to home page
+            header("Location: /home");
+            exit;
+        }
+    }
 }

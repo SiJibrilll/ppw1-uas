@@ -2,15 +2,18 @@
 
 use controllers\BaseController;
 use app\Dbh;
+use helpers\Auth;
 use helpers\ImageHandler;
 
 
 class AuthController extends BaseController {
   public function create() {
+    Auth::guest(); // Ensure user is a guest before showing registration form
     $this->view('register');
   }
 
   function login() {
+    Auth::guest();
     $this->view('login');
   }
 
