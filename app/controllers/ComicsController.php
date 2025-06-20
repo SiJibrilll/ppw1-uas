@@ -115,7 +115,7 @@ class ComicsController extends BaseController {
     }
 
     $dbh = new Dbh();
-    $sql = 'SELECT * FROM Comics as c join Images as i on c.image_id=i.id WHERE c.id = ?';
+    $sql = 'SELECT * FROM Comics as c left join Images as i on c.image_id=i.id WHERE c.id = ?';
     $comic = $dbh->query($sql, [$id])->fetchAll()[0];
     
     if (!$comic) {
