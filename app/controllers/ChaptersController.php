@@ -217,4 +217,29 @@ class ChaptersController extends BaseController {
         header("Location: /chapters?comic_id=" . urlencode($comicId));
         exit;
     }
+
+    function delete() {
+        Auth::guard();
+
+        $request = new Request();
+        $id = $request->input('id');
+        $comicId = $request->input('comic_id');
+
+        if (!$id || !$comicId) {
+            header('Location: /dashboard');
+            exit;
+        }
+
+        $dbh = new Dbh();
+        $result = $dbh->query('DELETE FROM Chapters WHERE id = ?', [$id]);
+
+        if (!$result->rowCount() > 0) { // if no rows are deleted, that means theres an error
+            $_SESSION['errors'] = ["Oops, something went wrong!"];
+            header("Location: /chapters?comic_id=" . urlencode($comicId));
+            exit;
+        }
+
+        header("Location: /chapters?comic_id=" . urlencode($comicId));
+        exit;
+    }
 }

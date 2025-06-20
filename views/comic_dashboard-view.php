@@ -412,6 +412,7 @@
                                 <a href="/chapters/edit?id=<?= htmlspecialchars($chapter['id']) ?>" class="btn btn-edit">Edit</a>
                                 <form id="delete/<?= htmlspecialchars($chapter['id']) ?>" action="/chapters/delete" method="POST" >
                                     <input type="text" name="id" value="<?= htmlspecialchars($chapter['id']) ?>" hidden>
+                                    <input type="text" name="comic_id" value="<?= htmlspecialchars($comic['id']) ?>" hidden>
                                     <div class="btn btn-delete" type="submit"  onclick="if(confirm('Are you sure you want to delete this chapter?')) {document.getElementById('delete/<?= htmlspecialchars($chapter['id']) ?>').submit()}">Delete</div>
                                 </form>
                             </td>

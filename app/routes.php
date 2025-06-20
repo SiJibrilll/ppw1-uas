@@ -26,5 +26,6 @@ return [
     '/comics/delete' => "ComicsController@delete",
     '/chapters' => "ChaptersController@store",
     '/chapters/update' => "ChaptersController@update",
+    '/chapters/delete' => "ChaptersController@delete",
   ]
 ];
