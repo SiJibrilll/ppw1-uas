@@ -11,6 +11,7 @@ return [
     '/search' => 'ComicsController@index',
     '/comics' => 'ComicsController@info',
     '/read' => 'ComicsController@read',
+    '/chapters' => 'ChaptersController@index',
   ],
 
   "POST" => [

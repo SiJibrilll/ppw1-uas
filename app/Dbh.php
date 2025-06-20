@@ -63,5 +63,28 @@ class Dbh {
         'total_pages' => $total_pages,
         'current_page' => $page
     ];
+  }
+
+  function paginateJoin($table, $order = 'ASC', $page = 1, $limit = 10, $foreignColumn = 'id', $foreignId = 0, $column = 'id', $operator = '=', $where = '') {
+    $offset = ($page - 1) * $limit;
+    
+    $stmt = $this->query("SELECT COUNT(*) FROM $table WHERE $foreignColumn = ? AND $column $operator ?", [$foreignId, "$where"]);
+    $total_items = $stmt->fetchColumn();
+    $total_pages = ceil($total_items / $limit);
+
+    // Manually inject limit/offset (safe since they are cast as ints)
+    $limit = (int) $limit;
+    $offset = (int) $offset;
+    $sql = "SELECT * FROM $table WHERE $foreignColumn = ? AND $column $operator ? ORDER BY id $order LIMIT $limit OFFSET $offset";
+
+    
+    $stmt = $this->query($sql, [$foreignId, "$where"]);
+    $data = $stmt->fetchAll();
+
+    return [
+        'data' => $data,
+        'total_pages' => $total_pages,
+        'current_page' => $page
+    ];
 }
 }

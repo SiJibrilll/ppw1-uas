@@ -353,12 +353,14 @@
     <div class="container">
         <div class="content-wrapper" style="margin-bottom: 2%;">
             <div class="table-header">
-                <h2 class="table-title">Comics Library</h2>
+                <h2 class="table-title">Chapter Library</h2>
+                <h4 style="font-size: 1rem;" class="table-title">Showing chapters for: <?=$comic['title'] ?></h4>
             </div>
             
             <div class="search-section">
                 <div class="search-container">
-                    <form method="GET" action="" class="search-form">
+                    <form method="GET" action="/chapters" class="search-form">
+                        <input type="hidden" name="comic_id" value="<?= htmlspecialchars($comic['id']) ?>">
                         <input 
                             type="text" 
                             name="search" 
@@ -368,7 +370,7 @@
                         >
                         <button type="submit" class="search-btn">Search</button>
                         <?php if(isset($_GET['search']) && !empty($_GET['search'])): ?>
-                        <a href="?" class="clear-btn">Clear</a>
+                        <a href="/chapters?comic_id=<?= $comic['id'] ?>" class="clear-btn">Clear</a>
                         <?php endif; ?>
                         
                         <!-- Preserve current page when searching -->
@@ -385,10 +387,8 @@
                     <?php endif; ?>
                 </div>
                 
-                <a href="/comics/create" class="new-comic-btn">New Comic</a>
+                <a href="/comics/create" class="new-comic-btn">New Chapter</a>
             </div>
-            
-            
             
             <div class="table-container">
                 <table id="comicsTable">
@@ -396,29 +396,23 @@
                         <tr>
                             <th>Cover</th>
                             <th>Title</th>
-                            <th>Author</th>
-                            <th>Description</th>
-                            <th>Chapters</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Sample data row - replace with PHP loop -->
                          
-                         <?php foreach($comics as $comic): ?>
+                         <?php foreach($chapters as $chapter): ?>
                         <tr>
-                            <td onclick="location.href = '/chapters?comic_id=<?= htmlspecialchars($comic['id']) ?>';" class="cover-cell">
-                                <img src="<?= htmlspecialchars($comic['cover']) ?: $GLOBALS['placeholder']?>" alt="<?= $comic['title']?> Cover" class="cover-image">
+                            <td onclick="location.href = '/chapters?id=<?= htmlspecialchars($chapter['id']) ?>';" class="cover-cell">
+                                <img src="<?= htmlspecialchars($chapter['cover']) ?: $GLOBALS['placeholder']?>" alt="<?= $chapter['title']?> Cover" class="cover-image">
                             </td>
-                            <td onclick="location.href = '/chapters?comic_id=<?= htmlspecialchars($comic['id']) ?>';" class="title-cell"><?= htmlspecialchars($comic['title']) ?></td>
-                            <td onclick="location.href = '/chapters?comic_id=<?= htmlspecialchars($comic['id']) ?>';"><?= htmlspecialchars($comic['author']) ?></td>
-                            <td onclick="location.href = '/chapters?comic_id=<?= htmlspecialchars($comic['id']) ?>';" class="description-cell" title="<?= htmlspecialchars($comic['description']) ?>"><?= htmlspecialchars($comic['description']) ?></td>
-                            <td onclick="location.href = '/chapters?comic_id=<?= htmlspecialchars($comic['id']) ?>';" class="chapter-count"><?= htmlspecialchars($comic['chapter_count']) ?></td>
+                            <td onclick="location.href = '/chapters?id=<?= htmlspecialchars($chapter['id']) ?>';" class="title-cell"><?= htmlspecialchars($chapter['title']) ?></td>
                             <td class="actions">
-                                <a href="/comics/edit?id=<?= htmlspecialchars($comic['id']) ?>" class="btn btn-edit">Edit</a>
-                                <form id="delete/<?= htmlspecialchars($comic['id']) ?>" action="/comics/delete" method="POST" >
-                                    <input type="text" name="id" value="<?= htmlspecialchars($comic['id']) ?>" hidden>
-                                    <div class="btn btn-delete" type="submit"  onclick="if(confirm('Are you sure you want to delete this comic?')) {document.getElementById('delete/<?= htmlspecialchars($comic['id']) ?>').submit()}">Delete</div>
+                                <a href="/chapters/edit?id=<?= htmlspecialchars($chapter['id']) ?>" class="btn btn-edit">Edit</a>
+                                <form id="delete/<?= htmlspecialchars($chapter['id']) ?>" action="/chapters/delete" method="POST" >
+                                    <input type="text" name="id" value="<?= htmlspecialchars($chapter['id']) ?>" hidden>
+                                    <div class="btn btn-delete" type="submit"  onclick="if(confirm('Are you sure you want to delete this chapter?')) {document.getElementById('delete/<?= htmlspecialchars($chapter['id']) ?>').submit()}">Delete</div>
                                 </form>
                             </td>
                         </tr>
@@ -431,17 +425,17 @@
 
             <div class="pagination">
                 <div class="pagination-info">
-                    Showing <?= (($current_page - 1) * 10) + 1 ?>-<?= min($current_page * 10, $total_comics) ?> of <?= $total_comics ?> comics</div>
+                    Showing <?= (($current_page - 1) * 10) + 1 ?>-<?= min($current_page * 10, $total_chapters) ?> of <?= $total_chapters ?> chapters</div>
                 <?php if($current_page > 1): ?>
-                <a href="?page=<?= $current_page - 1 ?>&search=<?= urlencode($search) ?>" class="pagination-btn">Previous</a>
+                <a href="?page=<?= $current_page - 1 ?>&search=<?= urlencode($search) ?>&comic_id=<?= urlencode($comic['id']) ?>" class="pagination-btn">Previous</a>
                 <?php else: ?>
                 <span class="pagination-btn disabled">Previous</span>
                 <?php endif; ?>
                 <?php for($i = max(1, $current_page - 2); $i <= min($total_pages, $current_page + 2); $i++): ?>
-                <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>" class="pagination-btn <?= $i == $current_page ? 'active' : '' ?>"><?= $i ?></a>
+                <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&comic_id=<?= urlencode($comic['id']) ?>" class="pagination-btn <?= $i == $current_page ? 'active' : '' ?>"><?= $i ?></a>
                 <?php endfor; ?>
                 <?php if($current_page < $total_pages): ?>
-                <a href="?page=<?= $current_page + 1 ?>&search=<?= urlencode($search) ?>" class="pagination-btn">Next</a>
+                <a href="?page=<?= $current_page + 1 ?>&search=<?= urlencode($search) ?>&comic_id=<?= urlencode($comic['id']) ?>" class="pagination-btn">Next</a>
                 <?php else: ?>
                 <span class="pagination-btn disabled">Next</span>
                 <?php endif; ?>
