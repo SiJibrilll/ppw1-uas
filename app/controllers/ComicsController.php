@@ -76,7 +76,7 @@ class ComicsController extends BaseController {
 
     $dbh = new Dbh();
     
-    $chapters = $dbh->paginate('Chapters', 'DESC', 1, 1, 'comic_id', 'like', $comic_id);
+    $chapters = $dbh->paginate('Chapters', 'DESC', $chapter_id, 1, 'comic_id', '=', $comic_id);
 
     $chapter = $dbh->query('SELECT * FROM Chapters WHERE id = ?', [$chapter_id])->fetch();
     if (!$chapter) {
@@ -94,7 +94,7 @@ class ComicsController extends BaseController {
       'pages' => $pages,
       'comic_id' => $comic_id,
       'chapter_id' => $chapter_id,
-      'total_pages' => count($pages),
+      'total_pages' => $chapters['total_pages'],
       'current_page' => $chapters['current_page'] 
     ]);
   }
