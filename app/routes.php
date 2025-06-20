@@ -12,6 +12,7 @@ return [
     '/comics' => 'ComicsController@info',
     '/read' => 'ComicsController@read',
     '/chapters' => 'ChaptersController@index',
+    '/chapters/create' => 'ChaptersController@create',
   ],
 
   "POST" => [
@@ -21,5 +22,6 @@ return [
     '/comics' => "ComicsController@store",
     '/comics/update' => "ComicsController@update",
     '/comics/delete' => "ComicsController@delete",
+    '/chapters' => "ChaptersController@store",
   ]
 ];

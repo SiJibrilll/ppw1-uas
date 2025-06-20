@@ -387,7 +387,7 @@
                     <?php endif; ?>
                 </div>
                 
-                <a href="/comics/create" class="new-comic-btn">New Chapter</a>
+                <a href="/chapters/create?comic_id=<?=urlencode($comic['id']) ?>" class="new-comic-btn">New Chapter</a>
             </div>
             
             <div class="table-container">
