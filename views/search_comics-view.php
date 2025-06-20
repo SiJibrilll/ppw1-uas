@@ -56,7 +56,7 @@
 			<div class="navbar-brand">
 				<span class="navbar-logo">
 					<a href="  ">
-						<img src="https://r.mobirisesite.com/1558499/assets/images/photo-1531501410720-c8d437636169.jpeg" alt="Mobirise Website Builder" style="height: 4.3rem;">
+						<img src="https://r.mobirisesite.com/1558499/assets/images/photo-1531501410720-c8d437636169.jpeg" style="height: 4.3rem;">
 					</a>
 				</span>
 				<span class="navbar-caption-wrap"><a class="navbar-caption text-black display-4" href="/home">ImComics</a></span>
@@ -113,7 +113,7 @@
                 <a href="/comics?id=<?=$comic['id'] ?>" class="text-black">
                     <div class="item-wrapper">
                         <div class="item-img mb-2">
-                            <img src="<?=$comic['cover'] ?>" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
+                            <img src="<?=$comic['cover'] ?>" title="" data-slide-to="0" data-bs-slide-to="0">
                         </div>
                         <div class="item-content">
                             <h5 class="item-title mbr-fonts-style display-7">
