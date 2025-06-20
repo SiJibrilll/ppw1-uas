@@ -385,7 +385,7 @@
                     <?php endif; ?>
                 </div>
                 
-                <a href="create_comic.php" class="new-comic-btn">New Comic</a>
+                <a href="/comics/create" class="new-comic-btn">New Comic</a>
             </div>
             
             
